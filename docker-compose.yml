@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123postgres
+      - POSTGRES_DB=pg_migrations
+    ports:
+      - '5432:5432'
+
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      - ADMINER_PLUGINS=tables-filter
+    ports:
+      - 8030:8080
+
+volumes:
+  db:
